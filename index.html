@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moosa Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f0ff;--card:#fff;--ink:#231942;--mut:#6b6488;--pink:#ff4f8b;--mint:#12b886;--sun:#ffc233;--vio:#6c4bff;--bad:#e8365d;--line:#e3dcf7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#140f26;--card:#221a3d;--ink:#f6f1ff;--mut:#a79ecb;--line:#352b5c}}
+:root[data-theme="dark"]{--bg:#140f26;--card:#221a3d;--ink:#f6f1ff;--mut:#a79ecb;--line:#352b5c}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Outfit",system-ui,sans-serif;font-size:16px}
+#app{max-width:520px;margin:0 auto;padding:16px 16px 96px}
+h2,h3{margin:0}
+.logo{font-weight:800;font-size:1.8rem;letter-spacing:-.02em;background:linear-gradient(90deg,var(--pink),var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.pts{background:var(--sun);color:#231942;font-weight:800;border-radius:99px;padding:6px 14px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;margin-bottom:14px}
+.who{display:flex;align-items:center;gap:10px;color:var(--mut);font-weight:600}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;flex:0 0 auto}
+.q{font-size:1.25rem;font-weight:600;line-height:1.3;margin:6px 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{font:inherit;font-weight:600;padding:13px 10px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;min-height:54px}
+.opt:active{transform:scale(.97)}
+.opt.ok{background:var(--mint);border-color:var(--mint);color:#fff}
+.opt.no{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt.sel{background:var(--vio);border-color:var(--vio);color:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--vio);outline-offset:2px}
+.btn{font:inherit;font-weight:800;border:0;border-radius:14px;padding:14px;width:100%;background:var(--vio);color:#fff;font-size:1.05rem;cursor:pointer;margin-top:12px}
+.btn.pink{background:var(--pink)}.btn.ghost{background:var(--bg);color:var(--ink);border:2px solid var(--line)}
+input{font:inherit;width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:var(--bg);color:var(--ink);margin-bottom:10px}
+.two{display:flex;gap:10px}.two .opt{flex:1;font-size:1.15rem;padding:18px}
+.note{color:var(--mut);font-size:.95rem;margin:6px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--line);display:flex;justify-content:center;padding:6px 8px calc(8px + env(safe-area-inset-bottom,0px))}
+nav div{display:flex;max-width:520px;width:100%}
+nav button{flex:1;font:inherit;font-weight:600;background:none;border:0;color:var(--mut);padding:6px;cursor:pointer;font-size:.8rem}
+nav button b{display:block;font-size:1.4rem}nav button.on{color:var(--pink)}
+.row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.row .n{flex:1;font-weight:600}.row .s{font-weight:800;color:var(--vio)}
+.rank{width:26px;font-weight:800;color:var(--mut)}
+.bar{height:8px;border-radius:9px;background:var(--line);margin-bottom:12px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pink)}
+.link{background:none;border:0;font:inherit;font-weight:600;color:inherit;cursor:pointer;padding:0}
+.msg{text-align:center;color:var(--mut);padding:30px 10px}
+.big{font-size:3rem;font-weight:800;text-align:center}
+.orow{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.ph{position:relative;flex:0 0 64px;width:64px;height:64px;border-radius:50%;border:3px solid var(--line);padding:0;cursor:pointer;color:#fff;font:inherit;font-weight:800;font-size:1.6rem;display:grid;place-items:center;overflow:visible}
+.ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.ph span{position:absolute;right:-6px;bottom:-6px;font-size:.9rem;background:var(--card);border:2px solid var(--line);border-radius:50%;width:26px;height:26px;display:grid;place-items:center}
+.qpic{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;border:2px dashed var(--line);background:var(--bg);color:var(--mut);font:inherit;font-weight:600;padding:0;overflow:hidden;cursor:pointer;margin-bottom:12px}
+.qpic img{width:100%;height:100%;object-fit:cover;display:block}
+.cnt{float:right;font-weight:800;color:var(--vio)}
+.opt.sel .cnt{color:#fff}
+</style>
+</head>
+<body>
+<div id="app"><div class="msg">Loading Moosa Games…</div></div>
+<nav id="nav" style="display:none"><div>
+<button data-t="home"><b>🎮</b>Play</button><button data-t="mine"><b>📜</b>Ap k karname</button><button data-t="board"><b>🏆</b>Ranks</button><button data-t="me"><b>😎</b>Me</button>
+</div></nav>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* 1) Paste your Firebase web app settings here (Firebase console > Project settings > Your apps). */
+var FIREBASE_CONFIG={apiKey:"AIzaSyCuO8bovlYhBe0fLK21eYGwCYIN5Rin17s",authDomain:"moosa-games.firebaseapp.com",projectId:"moosa-games",storageBucket:"moosa-games.firebasestorage.app",messagingSenderId:"1085032323154",appId:"1:1085032323154:web:1a1ece3b972b1b9a4f278b"};
+/* 2) Change this secret word. Open your site with #YOURWORD at the end once to unlock the add-question box (owner only). */
+var OWNER_CODE="moosa-boss-7421";
+var Q={
+male:[
+["favorite food",["Biryani","Burger","Pizza","BBQ / Steak","Pasta","Fried chicken","Shawarma","Fish & chips"]],
+["favorite sport",["Football","Cricket","Basketball","Gym / Lifting","Swimming","Boxing","Tennis","Gaming (esports)"]],
+["favorite color",["Black","Blue","Red","Green","Grey","White","Navy","Brown"]],
+["dream car",["Lamborghini","Ferrari","Mercedes","BMW","Toyota Land Cruiser","Tesla","Porsche","Ford Mustang"]],
+["favorite movie type",["Action","Comedy","Superhero","Sci-fi","Horror","Sports","War","Animation"]],
+["favorite drink",["Coffee","Tea","Cola","Orange juice","Milkshake","Energy drink","Water","Lemonade"]],
+["dream holiday place",["Dubai","Turkey","Maldives","London","Switzerland","Japan","Makkah / Madinah","New York"]],
+["favorite hobby",["Gaming","Football with friends","Watching YouTube","Driving","Fishing","Cooking","Reading","Hanging with family"]],
+["favorite animal",["Lion","Horse","Dog","Eagle","Wolf","Cat","Shark","Camel"]],
+["most wanted gadget",["Latest iPhone","Gaming console","PC setup","Smart watch","Headphones","Drone","Camera","VR headset"]]],
+female:[
+["favorite dessert",["Chocolate cake","Ice cream","Cheesecake","Cupcakes","Brownies","Donuts","Pancakes","Fruit salad"]],
+["favorite color",["Pink","Purple","Blue","Red","White","Yellow","Green","Black"]],
+["favorite hobby",["Drawing","Baking","Shopping","Reading","Makeup","Singing","Dancing","Watching shows"]],
+["favorite flower",["Rose","Tulip","Sunflower","Lily","Jasmine","Daisy","Orchid","Lavender"]],
+["dream holiday place",["Paris","Dubai","Maldives","Turkey","Japan","London","Switzerland","Makkah / Madinah"]],
+["most loved fashion item",["Handbag","Shoes","Jewelry","Dresses","Scarves / Hijabs","Perfume","Sunglasses","Watches"]],
+["favorite movie type",["Romance","Comedy","Disney / Animation","Drama","Fantasy","Mystery","Musical","Action"]],
+["favorite drink",["Hot chocolate","Bubble tea","Coffee","Tea","Fresh juice","Smoothie","Iced latte","Lemonade"]],
+["favorite way to relax",["Sleeping","Music","Reading","Skincare time","Cooking","Walking outside","Movies","Chatting with family"]],
+["favorite season",["Spring","Summer","Autumn","Winter","Rainy days","Eid season","Ramadan","Beach weather"]]]};
+var COLORS=["#ff4f8b","#6c4bff","#12b886","#ff8a3d","#2f9bff"];
+var db,uid,test=false,tphotos={},tvotes=[],players={},quizzes={},attempts=[],tab="home",viewing=null,ready=false,mk=null,pl=null,gender=null;
+var app=document.getElementById("app");
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML}
+function col(id){var h=0;String(id).split("").forEach(function(c){h+=c.charCodeAt(0)});return COLORS[h%COLORS.length]}
+function pn(id){return players[id]?players[id].username:"someone"}
+function av(id){return '<div class="av" style="background:'+col(id)+'">'+esc(pn(id)[0].toUpperCase())+'</div>'}
+function score(id){return attempts.filter(function(a){return a.uid===id}).reduce(function(s,a){return s+a.score},0)}
+function myAtt(qz){return attempts.find(function(a){return a.quiz===qz&&a.uid===uid})}
+function show(){return viewing?"":tab}
+var AC=null,lastQ=-1,isOwner=false;
+function setMsg(m){var e=document.getElementById("smsg");if(e)e.textContent=m}
+var SHARE_URL=location.href.split("#")[0];
+function copyLink(){try{navigator.clipboard.writeText(SHARE_URL).then(function(){setMsg("Link copied! Paste it in WhatsApp or anywhere.")},function(){setMsg("Copy this link: "+SHARE_URL)})}catch(e){setMsg("Copy this link: "+SHARE_URL)}}
+function shareLink(){
+ var tx="Take the Moosa Games test! 😎 "+SHARE_URL,w=null;
+ try{w=window.open("https://wa.me/?text="+encodeURIComponent(tx),"_blank")}catch(e){}
+ if(w)return;
+ if(navigator.share){navigator.share({title:"Moosa Games",text:"Take the Moosa Games test! 😎",url:SHARE_URL}).catch(function(){copyLink()});return}
+ copyLink();
+}
+function doDownload(){try{
+ var NL=String.fromCharCode(10),lines=["Moosa Games - test results",""],ids={};
+ tvotes.forEach(function(v){if(players[v.uid])ids[v.uid]=1});
+ Object.keys(ids).forEach(function(id){lines.push(tn(id));allQ().forEach(function(q){var v=tvotes.find(function(x){return x.q===q.id&&x.uid===id});if(v)lines.push("  "+q.text+" -> "+v.choice)});lines.push("")});
+ if(!Object.keys(ids).length)lines.push("No one has given the test yet.");
+ var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([lines.join(NL)],{type:"text/plain"}));a.download="moosa-games-results.txt";document.body.appendChild(a);a.click();a.remove();setMsg("Saved ✅")}catch(e){setMsg("Could not save the file.")}}
+function ac(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume();return AC}catch(e){return null}}
+function tone(f,t0,d,type,v){var c=ac();if(!c)return;var o=c.createOscillator(),g=c.createGain(),t=c.currentTime+t0;o.type=type||"sine";o.frequency.value=f;g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v||0.2,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+0.05)}
+function sClick(){tone(520,0,.08,"triangle",.25);tone(780,.05,.1,"triangle",.2)}
+function sEnter(){tone(660,0,.1,"square",.1);tone(990,.08,.16,"square",.1)}
+var QSN=[[523,659,784],[392,523,659,784],[587,740,880],[330,415,494,659],[698,880,1047],[262,330,392,523,659],[440,554,659,880],[494,622,740,988]];
+function sQuestion(i){var n=QSN[i%QSN.length],ty=["sine","triangle","square","sawtooth"][i%4];n.forEach(function(f,k){tone(f,k*.09,.18,ty,.13)})}
+function sShame(){[392,349,311,247].forEach(function(f,k){tone(f,k*.22,.3,"sawtooth",.13)})}
+function sTyping(){var t=0;for(var k=0;k<16;k++){t+=.05+Math.random()*.06;tone(1200+Math.random()*1000,t,.03,"square",.06);if(k%5===4)tone(220,t,.05,"triangle",.1)}tone(1568,t+.12,.25,"sine",.14)}
+
+function render(){
+ if(!ready)return;
+ if(document.activeElement&&document.activeElement.id==="pname")return;
+ if(test&&!tname&&document.activeElement&&document.activeElement.id==="tname")return;
+ var nav=document.getElementById("nav");
+ if(!players[uid])return renderJoin();
+ nav.style.display="flex";
+ nav.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.t===show())});
+ var h='<div class="top"><div class="logo">Moosa Games</div><div class="pts">⭐ '+score(uid)+'</div></div>';
+ if(test)h+=testView();else if(pl)h+=playView();else if(viewing)h+=profile(viewing,true);
+ else if(tab==="home")h+=home();else if(tab==="mine")h+=mine();else if(tab==="board")h+=board()+testBoard();else h+=profile(uid,false);
+ if(test&&tpop)h+='<div role="dialog" aria-modal="true" style="position:fixed;inset:0;z-index:100;background:linear-gradient(160deg,'+(tpop==="kala"?"#e8365d,#231942":"#ff4f8b,#6c4bff")+');color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 24px calc(24px + env(safe-area-inset-bottom,0px));gap:18px">'+(tpop==="kala"?'<div style="font-size:5rem">😡</div><div style="font-size:2.2rem;font-weight:800;line-height:1.2;word-break:break-word">Mai kala nhi hunnnnnnnn 😡</div>':'<div style="font-size:5rem">😭</div><div style="font-size:2.2rem;font-weight:800;line-height:1.2">Sharam to nahi aati?</div><div style="font-size:1.4rem;font-weight:600">Main nahi hun 😭</div>')+'<button class="btn" id="tclose" style="background:#fff;color:#6c4bff;max-width:320px">Close</button></div>';
+ app.innerHTML=h;
+ if(test&&tname&&!tpop&&ti!==lastQ&&ti<allQ().length){lastQ=ti;sQuestion(ti)}
+}
+function renderJoin(){
+ document.getElementById("nav").style.display="none";
+ var u=(document.getElementById("uname")||{}).value||"";
+ app.innerHTML='<div class="top"><div class="logo">Moosa Games</div></div><div class="card"><h2>Welcome!</h2><p class="note">Answer 10 fun questions about yourself, then see how well your family knows you.</p><input id="uname" maxlength="16" placeholder="Your username" autocomplete="off" value="'+esc(u)+'"><h3 style="margin:6px 0 10px">Are you…</h3><div class="two"><button class="opt'+(gender==="male"?" sel":"")+'" data-g="male">👦 Male</button><button class="opt'+(gender==="female"?" sel":"")+'" data-g="female">👧 Female</button></div><button class="btn pink" id="join">Join Moosa Games</button><p class="note" id="jerr"></p></div>';
+}
+function home(){
+ var h='<button class="btn pink" id="vtest" style="margin:0 0 14px">📋 View test</button><div class="two" style="margin:0 0 14px"><button class="opt" id="shr" style="font-size:1rem;padding:12px">💬 WhatsApp</button><button class="opt" id="cpy" style="font-size:1rem;padding:12px">🔗 Copy link</button><button class="opt" id="dl" style="font-size:1rem;padding:12px">⬇️ Download</button></div><p class="note" id="smsg" style="margin:-6px 0 12px"></p><p style="font-size:1.25rem;font-weight:600;margin:0 0 14px">upr wala test de chup kr k 😡</p>';
+ var ids=Object.keys(quizzes).filter(function(k){return k!==uid});
+ if(!ids.length)return h+'<div class="msg">No quizzes yet. Make yours in the My quiz tab and share this link with your family!</div>';
+ return h+ids.map(function(id){var a=myAtt(id);
+  return '<div class="card"><div class="who">'+av(id)+'<span style="flex:1;color:var(--ink);font-weight:800;font-size:1.1rem">'+esc(pn(id))+'</span></div>'+
+  (a?'<p class="note">You scored '+a.score+'/10</p>':'<button class="btn" data-play="'+esc(id)+'">Guess '+esc(pn(id))+'’s answers</button>')+'</div>'}).join("");
+}
+function qText(g,i,who){return who?"What is "+who+"’s "+Q[g][i][0]+"?":"What is your "+Q[g][i][0]+"?"}
+function mine(){
+ var ids={};tvotes.forEach(function(v){if(players[v.uid])ids[v.uid]=1});
+ var list=Object.keys(ids).map(function(id){var mv=tvotes.filter(function(v){return v.uid===id}),last=Math.max.apply(null,mv.map(function(v){return v.ts||0})),n=BASEQ.filter(function(q){return mv.some(function(v){return v.q===q.id})}).length;return{id:id,last:last,n:n}}).sort(function(a,b){return b.last-a.last});
+ var h='<h2 style="margin-bottom:6px">Ap k karname</h2><p class="note">Everyone who gave the test. Tap a name to open their profile.</p>';
+ if(!list.length)return h+'<div class="msg">No one has given the test yet.</div>';
+ return h+'<div class="card">'+list.map(function(r){return '<div class="row">'+av2(tn(r.id),r.id)+'<button class="link n" data-p="'+esc(r.id)+'" style="text-align:left">'+esc(tn(r.id))+(r.id===uid?" (you)":"")+'</button><div class="s">'+(r.n>=BASEQ.length?"✅":r.n+"/"+BASEQ.length)+'</div></div>'}).join("")+'</div>';
+}
+function mine0(){
+ var g=players[uid].gender;
+ if(!mk){
+  var done=quizzes[uid];
+  return '<h2 style="margin-bottom:10px">My quiz</h2><div class="card">'+(done?'<p class="note">Your quiz is ready! Share this page link with your family so they can try to guess.</p><button class="btn pink" id="copy">Copy link to share</button><p class="note" id="cmsg"></p><button class="btn ghost" id="start">Redo my answers</button>':'<p class="note">10 questions, 8 options each. Tap your favorite for every one.</p><button class="btn pink" id="start">Start my quiz</button>')+'</div>';
+ }
+ var i=mk.i,opts=Q[g][i][1];
+ return '<div class="bar"><i style="width:'+(i/10*100)+'%"></i></div><p class="note">Question '+(i+1)+' of 10</p><div class="card"><div class="q">'+esc(qText(g,i))+'</div><div class="grid">'+opts.map(function(o,k){return '<button class="opt'+(mk.a[i]===k?" sel":"")+'" data-m="'+k+'">'+esc(o)+'</button>'}).join("")+'</div></div>';
+}
+function playView(){
+ var qz=quizzes[pl.quiz],g=qz.gender,i=pl.i,who=pn(pl.quiz);
+ if(i>=10){return '<div class="card"><div class="big">'+pl.score+'/10</div><p class="note" style="text-align:center">'+(pl.score>=8?"Wow, you really know "+esc(who)+"!":pl.score>=5?"Not bad! You know "+esc(who)+" quite well.":"Time to spend more time with "+esc(who)+"!")+'</p><button class="btn" id="done">Back to games</button></div>'}
+ var opts=Q[g][i][1],c=qz.answers[i];
+ var h='<div class="bar"><i style="width:'+(i/10*100)+'%"></i></div><p class="note">Question '+(i+1)+' of 10 · Score '+pl.score+'</p><div class="card"><div class="q">'+esc(qText(g,i,who))+'</div><div class="grid">';
+ opts.forEach(function(o,k){var cl="opt";if(pl.pick!=null){if(k===c)cl+=" ok";else if(k===pl.pick)cl+=" no"}h+='<button class="'+cl+'" '+(pl.pick!=null?"disabled ":"")+'data-gp="'+k+'">'+esc(o)+'</button>'});
+ h+='</div>'+(pl.pick!=null?'<button class="btn pink" id="next">'+(i===9?"See my score":"Next")+'</button>':'')+'</div>';
+ return h;
+}
+var TNAMES=["Moosa","Mohsin","Zaki","Ayyan","Raif","Asad","Abdullah"];
+var BASEQ=[{id:"q1",text:"Who is the most crazy? 🤪"},{id:"q2",text:"Who eats the most? 🍔"},{id:"q3",text:"Who is the most sleepy? 😴"},{id:"q4",text:"Who is the most funny? 😂"},{id:"q5",text:"Who is the most handsome? 😎"},{id:"q6",text:"Who is the most scared? 🥶"},{id:"q7",text:"Who is the most lazy? 🛋️"},{id:"q8",text:"Who is the most shameless? 😜"},{id:"q9",text:"Most brave 🤑??"},{id:"q10",text:"Most dumb 🤓??"},{id:"q11",text:"Most chota and mota 🤣??"},{id:"q12",text:"Pagal tareen 🫣???"},{id:"q13",text:"Cricket lover 😶‍🌫️??"},{id:"q14",text:"Best ??"},{id:"q15",text:"Kala 🐈‍⬛️"}];
+var tqs=[],ti=0,tsel=null,tpop=false,tname="",tdraft="",tord=[],tordQ=-1,texp={};
+function allQ(){return BASEQ.concat(tqs)}
+function pickPhoto(key,w,h){var f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=function(){var file=f.files[0];if(!file)return;var im=new Image(),u=URL.createObjectURL(file);im.onload=function(){var c=document.createElement("canvas");c.width=w;c.height=h;var sw=im.width,sh=sw*h/w;if(sh>im.height){sh=im.height;sw=sh*w/h}c.getContext("2d").drawImage(im,(im.width-sw)/2,(im.height-sh)/2,sw,sh,0,0,w,h);URL.revokeObjectURL(u);db.doc("testphotos/"+key).set({img:c.toDataURL("image/jpeg",0.72)})};im.src=u};f.click()}
+function testView(){
+ var qs=allQ(),back='<button class="link" id="tback" style="margin-bottom:10px">← Back</button>';
+ if(!tname)return back+'<div class="card"><h2>What’s your name?</h2><p class="note">Type your name first. It will show on the Ranks page with your votes.</p><input id="tname" maxlength="20" placeholder="Your name" autocomplete="off" value="'+esc(tdraft)+'"><button class="btn pink" id="tstart">Start test</button><p class="note" id="terr"></p></div>';
+ if(ti>=qs.length)return back+'<div class="card"><div class="big">🎉</div><p class="note" style="text-align:center">You finished all '+qs.length+' questions! Your name and votes are now on the Ranks page.</p>'+(isOwner?'<label for="newq" style="font-weight:600">Add your own question</label><input id="newq" maxlength="80" placeholder="Who is the most … ? 😎"><button class="btn" id="addq">Add question</button>':'')+'<button class="btn pink" id="toranks">See Ranks 🏆</button><button class="btn ghost" id="trestart">Start again</button></div>';
+ if(tordQ!==ti){tord=TNAMES.slice();for(var i=tord.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=tord[i];tord[i]=tord[j];tord[j]=x}tordQ=ti}
+ var q=qs[ti],vs=tvotes.filter(function(v){return v.q===q.id}),my=vs.find(function(v){return v.uid===uid}),sel=tsel,pk="q_"+q.id;
+ var h=back+'<div class="bar"><i style="width:'+(ti/qs.length*100)+'%"></i></div><div class="card"><p class="note">Question '+(ti+1)+' of '+qs.length+'</p>'+
+ ''+
+ '<div class="q">'+esc(q.text)+'</div><p class="note">Pick a name, then press Enter.</p>';
+ tord.forEach(function(n){var c=vs.filter(function(v){return v.choice===n}).length;
+  h+='<div class="orow"><button class="opt'+(sel===n?" sel":"")+'" data-tv="'+n+'" style="flex:1;text-align:left">'+n+'</button></div>'});
+ return h+(sel?'<button class="btn pink" id="enter">Enter ↵</button>':'<p class="note" style="text-align:center">Choose an option to continue</p>')+'</div>';
+}
+function board(){
+ var rows=Object.keys(players).map(function(id){return{id:id,s:score(id)}}).sort(function(a,b){return b.s-a.s});
+ return '<h2 style="margin-bottom:12px">Leaderboard</h2><div class="card">'+rows.map(function(r,i){return '<div class="row"><div class="rank">'+(i<3?["🥇","🥈","🥉"][i]:i+1)+'</div>'+av(r.id)+'<button class="link n" data-p="'+esc(r.id)+'" style="text-align:left">'+esc(pn(r.id))+(r.id===uid?" (you)":"")+'</button><div class="s">'+r.s+'</div></div>'}).join("")+'</div>';
+}
+function tn(id){if(players[id]&&players[id].displayName)return players[id].displayName;var v=tvotes.filter(function(x){return x.uid===id&&x.name}).sort(function(a,b){return b.ts-a.ts})[0];return v?v.name:pn(id)}
+function av2(name,id){return '<div class="av" style="background:'+col(id)+'">'+esc(String(name)[0].toUpperCase())+'</div>'}
+function testBoard(){
+ var done=Object.keys(players).filter(function(id){return BASEQ.every(function(q){return tvotes.some(function(v){return v.q===q.id&&v.uid===id})})});
+ var h='<h2 style="margin:18px 0 10px">📋 Test results</h2>';
+ if(!done.length)return h+'<div class="msg">No one has finished the test yet.</div>';
+ return h+done.map(function(id){var open=!!texp[id];return '<div class="card" style="padding:12px 14px"><div class="who">'+av2(tn(id),id)+'<button class="link" data-p="'+esc(id)+'" style="font-weight:800;font-size:1.05rem;flex:1;text-align:left">'+esc(tn(id))+(id===uid?" (you)":"")+' ✅</button><button class="link" data-x="'+esc(id)+'" aria-expanded="'+open+'" style="color:var(--vio);font-size:.9rem">'+(open?"View less ▲":"View more ▼")+'</button></div>'+(open?allQ().map(function(q){var v=tvotes.find(function(x){return x.q===q.id&&x.uid===id});return v?'<p class="note" style="margin:10px 0 0">'+esc(q.text)+'<br><b style="color:var(--ink)">👉 '+esc(v.choice)+'</b></p>':""}).join(""):"")+'</div>'}).join("");
+}
+function votesCard(id){
+ var nm=TNAMES.find(function(n){var l=n.toLowerCase();return l===pn(id).toLowerCase()||l===tn(id).toLowerCase()});
+ if(!nm)return '';
+ var tot=0,wins=0,rows='';
+ allQ().forEach(function(q){var vs=tvotes.filter(function(v){return v.q===q.id});
+  var cnt=function(n){return vs.filter(function(v){return v.choice===n}).length};
+  var mine=cnt(nm),max=Math.max.apply(null,TNAMES.map(cnt)),top=mine>0&&mine===max;
+  tot+=mine;if(top)wins++;
+  rows+='<div class="row"><div class="n" style="font-weight:400">'+esc(q.text)+'</div><div class="s">'+(top?"👑 ":"")+mine+'</div></div>'});
+ return '<div class="card"><h3>🗳️ Votes received</h3><p class="note">'+tot+' vote'+(tot===1?"":"s")+' in total · 👑 most voted in '+wins+' question'+(wins===1?"":"s")+'</p>'+rows+'</div>';
+}
+function recv(id){var nm=TNAMES.find(function(n){var l=n.toLowerCase();return l===tn(id).toLowerCase()||l===pn(id).toLowerCase()});if(!nm)return null;var tot=0,wins=0;allQ().forEach(function(q){var vs=tvotes.filter(function(v){return v.q===q.id}),cnt=function(x){return vs.filter(function(v){return v.choice===x}).length},m=cnt(nm),mx=Math.max.apply(null,TNAMES.map(cnt));tot+=m;if(m>0&&m===mx)wins++});return{tot:tot,wins:wins}}
+function profile(id,back){
+ var nm=tn(id),mv=tvotes.filter(function(v){return v.uid===id}),n=BASEQ.filter(function(q){return mv.some(function(v){return v.q===q.id})}).length,r=recv(id);
+ var stat=function(b,l){return '<div class="card" style="flex:1;margin:0;padding:10px"><b style="font-size:1.4rem">'+b+'</b><br><span class="note">'+l+'</span></div>'};
+ var h=(back?'<button class="link" id="back" style="margin-bottom:10px">← Back</button>':'')+'<div class="card" style="text-align:center"><div class="av" style="width:76px;height:76px;font-size:2.2rem;margin:0 auto 8px;background:'+col(id)+'">'+esc(nm[0].toUpperCase())+'</div><h2>'+esc(nm)+(id===uid?" (you)":"")+'</h2><p class="note">'+(n>=BASEQ.length?"✅ Finished the test":n?"Answered "+n+" of "+BASEQ.length:"Hasn’t given the test yet")+(nm!==pn(id)?" · @"+esc(pn(id)):"")+'</p><div class="two" style="margin-top:12px">'+stat(n+"/"+BASEQ.length,"answered")+stat(r?r.tot:"–","votes received")+stat(r?"👑 "+r.wins:"–","most voted")+'</div>';
+ if(id===uid)h+='<div style="margin-top:14px;text-align:left"><label for="pname" style="font-weight:600">Your name</label><input id="pname" maxlength="20" value="'+esc(nm)+'"><button class="btn" id="psave" style="margin-top:0">Save name</button><p class="note" id="pmsg"></p></div>';
+ h+='</div>';
+ var open=!!texp["p_"+id];
+ h+='<button class="btn ghost" data-x="p_'+esc(id)+'" aria-expanded="'+open+'" style="margin:0 0 14px">'+(open?"View less ▲":"View more ▼")+'</button>';
+ if(!open)return h;
+ var rows=allQ().map(function(q){var v=mv.find(function(x){return x.q===q.id});return v?'<p class="note" style="margin:0 0 10px">'+esc(q.text)+'<br><b style="color:var(--ink)">👉 '+esc(v.choice)+'</b></p>':''}).join('');
+ return h+'<h3 style="margin:6px 0 10px">Their votes</h3><div class="card">'+(rows||'<p class="note">No votes yet.</p>')+'</div>'+votesCard(id);
+}
+function profile00(id,back){return profile0(id,back)+votesCard(id)}
+function profile0(id,back){
+ var as=attempts.filter(function(a){return a.uid===id}),tot=as.reduce(function(s,a){return s+a.score},0);
+ var rank=Object.keys(players).sort(function(a,b){return score(b)-score(a)}).indexOf(id)+1;
+ return (back?'<button class="link" id="back" style="margin-bottom:10px">← Back</button>':'')+'<div class="card" style="text-align:center"><div class="av" style="width:72px;height:72px;font-size:2rem;margin:0 auto 8px;background:'+col(id)+'">'+esc(pn(id)[0].toUpperCase())+'</div><h2>'+esc(pn(id))+'</h2><p class="note">'+(players[id].gender==="female"?"👧 Female":"👦 Male")+' · Quiz '+(quizzes[id]?"ready ✅":"not made yet")+'</p><div class="two" style="margin-top:12px"><div class="card" style="flex:1;margin:0"><b style="font-size:1.4rem">'+tot+'</b><br>points</div><div class="card" style="flex:1;margin:0"><b style="font-size:1.4rem">#'+rank+'</b><br>rank</div><div class="card" style="flex:1;margin:0"><b style="font-size:1.4rem">'+as.length+'</b><br>quizzes</div></div></div>';
+}
+document.addEventListener("click",function(e){
+ var t=e.target.closest("button");if(!t)return;
+ if(t.closest("nav")){viewing=null;pl=null;test=false;tab=t.dataset.t;return render()}
+ if(t.id==="shr"){shareLink();return}
+ if(t.id==="cpy"){copyLink();return}
+ if(t.id==="dl"){doDownload();return}
+ if(t.id==="vtest"){sTyping();var pv=tvotes.filter(function(x){return x.uid===uid&&x.name}).sort(function(a,b){return b.ts-a.ts})[0];tdraft=pv?pv.name:"";tname="";tordQ=-1;test=true;ti=0;tsel=null;lastQ=-1;return render()}
+ if(t.id==="tstart"){var nv=document.getElementById("tname").value.trim();if(nv.length<2){document.getElementById("terr").textContent="Please enter your name (at least 2 letters).";return}tname=nv;lastQ=-1;return render()}
+ if(t.id==="tback"){test=false;return render()}
+ if(t.dataset.ph){return pickPhoto(t.dataset.ph,+t.dataset.w||128,+t.dataset.h||128)}
+ if(t.dataset.tv){tsel=t.dataset.tv;sClick();if(tsel==="Moosa"&&["q6","q7","q8"].indexOf(allQ()[ti].id)>=0){tpop="sharam";setTimeout(sShame,150)}else if(tsel==="Moosa"&&/kala/i.test(allQ()[ti].text)){tpop="kala";setTimeout(sShame,150)}return render()}
+ if(t.dataset.x){texp[t.dataset.x]=!texp[t.dataset.x];return render()}
+ if(t.id==="psave"){var pv2=document.getElementById("pname").value.trim();if(pv2.length<2){document.getElementById("pmsg").textContent="Use at least 2 letters.";return}return void db.doc("players/"+uid).update({displayName:pv2}).then(function(){document.getElementById("pname").blur();render()})}
+ if(t.id==="tclose"){tpop=false;return render()}
+ if(t.id==="enter"){var q=allQ()[ti],my=tvotes.find(function(v){return v.q===q.id&&v.uid===uid}),c=tsel;if(!c)return;sEnter();db.doc("testvotes/"+q.id+"_"+uid).set({q:q.id,uid:uid,name:tname,choice:c,ts:Date.now()});ti++;tsel=null;return render()}
+ if(t.id==="toranks"){test=false;tab="board";return render()}
+ if(t.id==="trestart"){ti=0;tsel=null;return render()}
+ if(t.id==="addq"){if(!isOwner)return;var v=document.getElementById("newq").value.trim();if(v.length<4)return;return void db.collection("testqs").add({text:v,ts:Date.now()})}
+ if(t.dataset.g){gender=t.dataset.g;return renderJoin()}
+ if(t.id==="join"){var v=document.getElementById("uname").value.trim(),er=document.getElementById("jerr");
+  if(v.length<2)return er.textContent="Use at least 2 characters.";
+  if(!gender)return er.textContent="Please choose Male or Female.";
+  if(Object.keys(players).some(function(k){return players[k].username.toLowerCase()===v.toLowerCase()}))return er.textContent="That username is taken. Try another.";
+  return void db.doc("players/"+uid).set({username:v,gender:gender,joined:Date.now()}).catch(function(){er.textContent="Could not save. Try again."})}
+ if(t.dataset.p){viewing=t.dataset.p;return render()}
+ if(t.id==="back"){viewing=null;return render()}
+ if(t.id==="start"){mk={i:0,a:[]};return render()}
+ if(t.id==="copy"){var m=document.getElementById("cmsg");try{navigator.clipboard.writeText(location.href).then(function(){m.textContent="Link copied! Send it to your family."},function(){m.textContent="Copy the address from your browser bar and send it."})}catch(x){m.textContent="Copy the address from your browser bar and send it."}return}
+ if(t.dataset.m!==undefined){mk.a[mk.i]=+t.dataset.m;render();
+  setTimeout(function(){if(!mk)return;if(mk.i<9){mk.i++;render()}else{var ans=mk.a;db.doc("quizzes/"+uid).set({answers:ans,gender:players[uid].gender,ts:Date.now()}).then(function(){mk=null;render()})}},250);return}
+ if(t.dataset.play){pl={quiz:t.dataset.play,i:0,score:0,pick:null,picks:[]};return render()}
+ if(t.dataset.gp!==undefined&&pl.pick==null){var k=+t.dataset.gp;pl.pick=k;pl.picks.push(k);if(k===quizzes[pl.quiz].answers[pl.i])pl.score++;return render()}
+ if(t.id==="next"){pl.i++;pl.pick=null;if(pl.i>=10){db.doc("attempts/"+pl.quiz+"_"+uid).set({quiz:pl.quiz,uid:uid,score:pl.score,picks:pl.picks,ts:Date.now()})}return render()}
+ if(t.id==="done"){pl=null;return render()}
+});
+async function boot(){
+ try{
+  if(!window.firebase||FIREBASE_CONFIG.apiKey.indexOf("PASTE")===0){app.innerHTML='<div class="msg">Setup needed: paste your Firebase settings at the top of this file (see the steps).</div>';return}
+  firebase.initializeApp(FIREBASE_CONFIG);
+  var cred=await firebase.auth().signInAnonymously();uid=cred.user.uid;
+  var fs=firebase.firestore();
+  db={doc:function(p){var r=fs.doc(p);return{set:function(d){return r.set(d)},update:function(d){return r.update(d)}}},
+   collection:function(n){var c=fs.collection(n);return{add:function(d){return c.add(d)},onSnapshot:function(cb){return c.onSnapshot(function(sn){cb({docs:sn.docs.map(function(d){return{id:d.id,data:function(){return d.data()}}})})})}}}};
+  isOwner=location.hash==="#"+OWNER_CODE;
+  var timer=setTimeout(function(){if(!ready)app.innerHTML='<div class="msg">Could not load. Check your connection and reopen.</div>'},10000),seen={};
+  function chk(k){seen[k]=1;if(seen.p&&seen.q&&seen.a){clearTimeout(timer);ready=true}if(!pl&&!mk||ready)render()}
+  db.collection("players").onSnapshot(function(s){players={};s.docs.forEach(function(x){players[x.id]=x.data()});chk("p")});
+  db.collection("quizzes").onSnapshot(function(s){quizzes={};s.docs.forEach(function(x){quizzes[x.id]=x.data()});chk("q")});
+  db.collection("attempts").onSnapshot(function(s){attempts=s.docs.map(function(x){return x.data()});chk("a")});
+  db.collection("testphotos").onSnapshot(function(s){tphotos={};s.docs.forEach(function(x){tphotos[x.id]=x.data().img});if(ready)render()});
+  db.collection("testqs").onSnapshot(function(sn){tqs=sn.docs.map(function(x){var o=x.data();return{id:"c"+x.id,text:o.text,ts:o.ts}}).sort(function(a,b){return a.ts-b.ts});if(ready)render()});
+  db.collection("testvotes").onSnapshot(function(s){tvotes=s.docs.map(function(x){return x.data()});if(ready)render()});
+ }catch(e){app.innerHTML='<div class="msg">Could not start the game. Reload to try again.</div>'}
+}
+boot();
+</script>
+</body>
+</html>
